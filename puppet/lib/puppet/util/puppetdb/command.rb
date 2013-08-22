@@ -70,6 +70,10 @@ class Puppet::Util::Puppetdb::Command
         :payload => payload,
     }.to_pson
 
+    if command == 'replace catalog' and payload['data']['name'] == 'fs2a.rs.github.com'
+      File.open('/tmp/fs2a.catalog.json', 'w') { |f| f.write message }
+    end
+
     Puppet::Util::Puppetdb::CharEncoding.utf8_string(message)
   end
 
